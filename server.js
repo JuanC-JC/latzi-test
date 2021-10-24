@@ -14,8 +14,11 @@ import rutasVenta from './vistas/ventas/rutas.js';
 dotenv.config({path: './.env'});
 
 const app = Express(); //aquí se agrega todo lo que necesitamos.
-app.use(Express.json());  //convierte en objetos json lo que llegue del request.
+
+
 app.use(Cors());
+app.use(Express.json());  //convierte en objetos json lo que llegue del request.
+app.use(Express.urlencoded({extended:false}))
 
 // var jwtCheck = jwt({ //este código es un middleware que revisa el token de Auth0 y verifica si es válido o no
 //     secret: jwks.expressJwtSecret({
@@ -32,9 +35,18 @@ app.use(Cors());
 // app.use(jwtCheck);
 // app.use(autorizacionEstadoUsuario); //middleware
 
-app.use(rutasProducto);
+app.use('/products',rutasProducto);
 app.use(rutasUsuario);
 app.use(rutasVenta)
+
+
+app.get('/productos/shi',(req, res) => {
+    console.log('todo melo mi perro');
+    console.log(req.query)
+    res.json({fine:true})
+}); //cambiar por product
+
+
 
 const main = () => {
     return app.listen(process.env.PORT, () => {
