@@ -39,18 +39,15 @@ app.use('/products',rutasProducto);
 app.use(rutasUsuario);
 app.use(rutasVenta)
 
+app.get('/',(req,res)=>{
+    res.json({connected:true})
+})
 
-app.get('/productos/shi',(req, res) => {
-    console.log('todo melo mi perro');
-    console.log(req.query)
-    res.json({fine:true})
-}); //cambiar por product
-
-
+const port = process.env.PORT || 3000;
 
 const main = () => {
-    return app.listen(process.env.PORT, () => {
-        console.log(`escuchando puerto ${process.env.PORT}`); //prende el servidor escuchando solicitudes en un puerto específico.
+    return app.listen(port, () => {
+        console.log(`escuchando puerto ${port}`); //prende el servidor escuchando solicitudes en un puerto específico.
     });
 };
 
